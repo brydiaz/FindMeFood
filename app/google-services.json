@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "771701767641",
+    "project_id": "findmefood-bios-cr",
+    "storage_bucket": "findmefood-bios-cr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771701767641:android:e4a7aa25a4db9a2cfb2dc8",
+        "android_client_info": {
+          "package_name": "com.bios.findmefood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771701767641-6r4645cfuo88hef9f9crdcpnpl46tt3c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVhG3UQzwA9N3MmMzDF63crotMnGfpqP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771701767641-6r4645cfuo88hef9f9crdcpnpl46tt3c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

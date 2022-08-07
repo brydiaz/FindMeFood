@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FindMeFood</string>
+    <string name="registrar">Registrar</string>
+    <string name="acceder">Acceder</string>
+</resources>
