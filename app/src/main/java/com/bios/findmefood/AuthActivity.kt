@@ -48,7 +48,8 @@ class AuthActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email.text.toString(),
                     password.text.toString()).addOnCompleteListener{
                     if (it.isSuccessful ) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        //showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        showMap()
                     } else {
                         showAlert()
                     }
@@ -72,5 +73,10 @@ class AuthActivity : AppCompatActivity() {
 
         }
         startActivity(homeIntent)
+    }
+
+    private fun showMap() {
+        val mapIntent = Intent(this, MapsActivity::class.java).apply {}
+        startActivity(mapIntent)
     }
 }
