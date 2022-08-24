@@ -3,7 +3,6 @@ package com.bios.findmefood
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -14,42 +13,29 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        val analytics : FirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-        val bundle = Bundle()
-        bundle.putString("message", "Integracion Completa")
-        analytics.logEvent("InitScreen", bundle)
-
         //Setup
         setup()
     }
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Make the user validation and call or not the function to show next intent
+     */
     private fun setup() {
         title = "Autentication"
-        val button = findViewById<Button>(R.id.signUnBtt)
-        val buttonAcc = findViewById<Button>(R.id.logInBtt)
+        val buttonAcc = findViewById<Button>(R.id.log_in_button)
 
-        val email = findViewById<EditText>(R.id.emailText)
-        val password = findViewById<EditText>(R.id.emailText)
+        val email = findViewById<EditText>(R.id.email_edit_text)
+        val password = findViewById<EditText>(R.id.email_edit_text)
 
-        button.setOnClickListener{
-            if(email.text.isNotEmpty() && password.text.isNotEmpty()) {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),
-                    password.text.toString()).addOnCompleteListener{
-                        if (it.isSuccessful ) {
-                            showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
-                        } else {
-                            showAlert()
-                        }
-                }
-            }
-        }
 
         buttonAcc.setOnClickListener{
             if(email.text.isNotEmpty() && password.text.isNotEmpty()) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email.text.toString(),
                     password.text.toString()).addOnCompleteListener{
                     if (it.isSuccessful ) {
-                        //showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
-                        showMap()
+                        showMain()
                     } else {
                         showAlert()
                     }
@@ -58,6 +44,12 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Start one dialog alert
+     */
     private fun showAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -66,17 +58,15 @@ class AuthActivity : AppCompatActivity() {
         val dialog:AlertDialog = builder.create()
         dialog.show()
     }
-    private fun showHome(email: String, provider:ProviderType) {
-        val homeIntent = Intent(this, HomeActivity::class.java).apply {
-            putExtra("email", email);
-            putExtra("provider", provider);
 
-        }
-        startActivity(homeIntent)
-    }
-
-    private fun showMap() {
-        val mapIntent = Intent(this, MapsActivity::class.java).apply {}
-        startActivity(mapIntent)
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Start the main activity
+     */
+    private fun showMain() {
+        val mainIntent = Intent(this, MainActivity::class.java).apply {}
+        startActivity(mainIntent)
     }
 }

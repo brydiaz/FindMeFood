@@ -31,7 +31,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/search_text_entry"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,11 +49,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/addBtt"
+                android:id="@+id/back_to_main_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Agregar" />
+                android:text="Volver" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/searchBtt"
+                android:id="@+id/search_place_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

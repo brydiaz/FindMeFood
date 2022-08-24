@@ -9,6 +9,7 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 
@@ -52,13 +53,40 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    /*
+       In: An instance of google map
+       Out: -
+       Restrictions: -
+       Function: Google API func, when the map is ready, do something
+     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         // Add a marker in Sydney and move the camera
+        setup()
         getCurrentLocation(mMap)
 
+
+    }
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Setup all the settings
+     */
+    private fun setup() {
+        val backButton = findViewById<Button>(R.id.back_to_main_button)
+        backButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
+    /*
+       In: An instance of google map
+       Out: -
+       Restrictions: -
+       Function: Check if we have all the permissions, if exists draw our position
+     */
     private fun getCurrentLocation(gmap: GoogleMap) {
         if (checkPermissions()) {
             if(isLocationEnabled()) {
@@ -81,7 +109,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     } else {
                         Toast.makeText(applicationContext, "Locacion obtenida!",
                             Toast.LENGTH_SHORT).show()
-                        //Aca ponemos nuestro marcador
+                        //Here we put our market
                         createMark(gmap, location.latitude,location.longitude)
 
                     }
@@ -99,7 +127,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
-
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: request the permission
+     */
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(this,
         arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),
@@ -110,6 +143,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         private const val PERMISSION_REQUEST_LOCATION = 100
     }
 
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: request the permission
+     */
     private fun checkPermissions() : Boolean {
         return (ActivityCompat.checkSelfPermission(this,
             android.Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -118,6 +157,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 == PackageManager.PERMISSION_GRANTED)
     }
 
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: request the permission
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -136,13 +181,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Check if the location is enable
+     */
     private fun isLocationEnabled():Boolean {
         val locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE)
                 as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
-
+    /*
+       In: -
+       Out: -
+       Restrictions: -
+       Function: Create a mark in the map, in this case, with our position
+     */
     private fun createMark(gmap:GoogleMap, lat:Double, long:Double) {
         val coor = LatLng(lat, long)
         val marker = MarkerOptions().position(coor).title("Mi posicion")
