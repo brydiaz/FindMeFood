@@ -25,12 +25,15 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.ArrayList
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private val db = DataBaseControl()
+    private val db1 = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +114,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             Toast.LENGTH_SHORT).show()
                         //Here we put our market
                         createMark(gmap, location.latitude,location.longitude)
+                        println("----------------------------------------")
+                        println(location.latitude.toString())
+                        db.getAllPlaces(gmap)
+                        println("----------------------------------------")
+
+
+
 
                     }
                 }
@@ -133,7 +143,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
        Restrictions: -
        Function: request the permission
      */
-    private fun requestPermissions() {
+    fun requestPermissions() {
         ActivityCompat.requestPermissions(this,
         arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION),
         PERMISSION_REQUEST_LOCATION)
@@ -149,7 +159,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
        Restrictions: -
        Function: request the permission
      */
-    private fun checkPermissions() : Boolean {
+    fun checkPermissions() : Boolean {
         return (ActivityCompat.checkSelfPermission(this,
             android.Manifest.permission.ACCESS_COARSE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -187,7 +197,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
        Restrictions: -
        Function: Check if the location is enable
      */
-    private fun isLocationEnabled():Boolean {
+     fun isLocationEnabled():Boolean {
         val locationManager:LocationManager = getSystemService(Context.LOCATION_SERVICE)
                 as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
@@ -204,6 +214,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val marker = MarkerOptions().position(coor).title("Mi posicion")
         gmap.addMarker(marker)
         gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(coor, 18f))
-
     }
 }

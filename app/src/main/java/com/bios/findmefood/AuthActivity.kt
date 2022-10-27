@@ -6,10 +6,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthCredential
+import com.google.firebase.auth.GoogleAuthProvider
 
 class AuthActivity : AppCompatActivity() {
+
+    private val GOOGLE_SIGN_IN = 100
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
@@ -25,6 +33,7 @@ class AuthActivity : AppCompatActivity() {
     private fun setup() {
         title = "Autentication"
         val buttonAcc = findViewById<Button>(R.id.log_in_button)
+        val buttonGoogle = findViewById<Button>(R.id.googleLogIn_btt)
 
         val email = findViewById<EditText>(R.id.email_edit_text)
         val password = findViewById<EditText>(R.id.email_edit_text)
@@ -41,6 +50,43 @@ class AuthActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+        buttonGoogle.setOnClickListener {
+            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail().build()
+            val googleClient = GoogleSignIn.getClient(this,googleConf)
+            googleClient.signOut()
+            startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+
+
+
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == GOOGLE_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+
+                val account = task.getResult(ApiException::class.java)
+                if (account != null) {
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
+                        if(it.isSuccessful ){
+                            showMain()
+                        } else {
+                            println("holi")
+                            showAlert()
+                        }
+                    }
+                }
+            } catch(e: ApiException) {
+                showAlert()
+            }
+
         }
     }
 
