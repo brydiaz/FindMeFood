@@ -16,7 +16,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.firestore.FirebaseFirestore
 
 class NewPlaceActivity : AppCompatActivity() {
 
@@ -37,8 +36,8 @@ class NewPlaceActivity : AppCompatActivity() {
       Function: Setup all the settings
     */
     private fun setup() {
-        val backButton = findViewById<Button>(R.id.back_to_main_from_add)
-        val addButton = findViewById<Button>(R.id.add_new_btt)
+        val backButton = findViewById<Button>(R.id.back_to_maps)
+        val addButton = findViewById<Button>(R.id.make_calification_btt)
         backButton.setOnClickListener {
             onBackPressed()
         }
@@ -70,9 +69,9 @@ class NewPlaceActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(applicationContext, "Locacion obtenida!",
                             Toast.LENGTH_SHORT).show()
-                        val name = findViewById<EditText>(R.id.name_txt)
-                        val description = findViewById<EditText>(R.id.description_txt)
-                        val calification = findViewById<RatingBar>(R.id.rating_bar)
+                        val name = findViewById<EditText>(R.id.name_place_txt)
+                        val description = findViewById<EditText>(R.id.description_place_txt)
+                        val calification = findViewById<RatingBar>(R.id.rating_place_bar)
                         db.addPlace(name.text.toString(), description.text.toString(),
                             calification.rating, location.latitude, location.longitude)
                     }

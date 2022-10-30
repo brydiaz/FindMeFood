@@ -1,5 +1,7 @@
 package com.bios.findmefood
 
+import android.widget.RatingBar
+import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -41,4 +43,33 @@ class DataBaseControl {
 
        }
     }
+
+    fun getPlace(toFind:String, nameField:TextView, descriptionField: TextView, ratingBar: RatingBar) {
+        val data = db.collection("places").document(toFind).get().addOnSuccessListener {
+            val name = it.get("name") as String
+            val description = it.get("description") as String
+            val rating = it.get("califications") as ArrayList<*>
+            val lat = it.get("latitude") as Double
+            val long = it.get("longitude") as Double
+            nameField.text = name
+            descriptionField.text = description
+            var sumRating:Double = 0.0
+            for(i in rating){
+                sumRating += i as Double
+            }
+            val finalRating = sumRating/rating.size
+            ratingBar.rating = finalRating.toFloat()
+            }
+    }
+
+    fun addCalification(keyName:String, rating:Double) {
+        val data = db.collection("places").document(keyName).get().addOnSuccessListener {
+            val califications = it.get("califications") as ArrayList<Float>
+            califications.add(rating.toFloat())
+            db.collection("places").document(keyName).update("califications", califications)
+        }
+        }
+
+
+
 }
