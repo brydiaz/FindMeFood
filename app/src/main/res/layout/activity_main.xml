@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="412dp"
+        android:layout_height="736dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
@@ -18,37 +19,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39">
+        app:layout_constraintVertical_bias="0.0">
 
         <Button
             android:id="@+id/add_place_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nuevo Lugar" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp"
+            android:text="Nuevo Lugar"
+            app:icon="@drawable/add__3_"
+            app:iconTintMode="multiply" />
 
         <Button
             android:id="@+id/see_places_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ver mapa" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp"
+            android:text="ver mapa"
+            app:icon="@drawable/restaurant"
+            app:iconTint="@color/white"
+            app:iconTintMode="multiply" />
 
         <Button
             android:id="@+id/back_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="volver" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="200dp"
+            android:text="Cerrar Sesion"
+            app:icon="@drawable/logout"
+            app:iconTintMode="multiply" />
 
     </LinearLayout>
 

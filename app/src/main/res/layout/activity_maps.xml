@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base"
     tools:context=".HomeActivity">
 
     <LinearLayout
@@ -30,14 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/search_text_entry"
+        <Spinner
+            android:id="@+id/places_spinner"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Hoy busco ir a comer..."
-            android:inputType="textPersonName" />
+            android:layout_height="62dp" />
 
         <Space
             android:layout_width="match_parent"
@@ -53,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_style"
                 android:text="Volver" />
 
             <Space
@@ -65,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_style"
                 android:text="Buscar" />
         </LinearLayout>
 

@@ -8,10 +8,14 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.view.get
 import com.bios.findmefood.databinding.ActivityMapsBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -19,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,13 +33,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
     private val db = DataBaseControl()
-    private val db1 = FirebaseFirestore.getInstance()
+    private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        title = "Nuestro Mapa!"
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        spinner = findViewById<Spinner>(R.id.places_spinner)
+        db.loadPlaces(spinner, this)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -83,8 +92,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setup() {
         val backButton = findViewById<Button>(R.id.back_to_main_button)
         backButton.setOnClickListener {
-            onBackPressed()
+            val main = Intent(this, MainActivity::class.java)
+            startActivity(main)
         }
+        val searchButton = findViewById<Button>(R.id.search_place_button)
+        searchButton.setOnClickListener {
+            searchPlace()
+        }
+
     }
 
     /*
@@ -117,10 +132,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             Toast.LENGTH_SHORT).show()
                         //Here we put our market
                         createMark(gmap, location.latitude,location.longitude)
-                        println("----------------------------------------")
-                        println(location.latitude.toString())
+
                         db.getAllPlaces(gmap)
-                        println("----------------------------------------")
+
 
 
 
@@ -215,7 +229,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun createMark(gmap:GoogleMap, lat:Double, long:Double) {
         val coor = LatLng(lat, long)
         val marker = MarkerOptions().position(coor).title("Mi posicion")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.position))
         gmap.addMarker(marker)
         gmap.animateCamera(CameraUpdateFactory.newLatLngZoom(coor, 18f))
+    }
+    fun searchPlace() {
+        val seePlace = Intent(this, PlaceActivity::class.java)
+        val markerName = spinner.selectedItem.toString()
+
+        seePlace.putExtra("keyName",markerName)
+        startActivity(seePlace)
     }
 }

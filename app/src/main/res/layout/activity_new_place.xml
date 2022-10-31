@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base"
     tools:context=".NewPlaceActivity">
 
     <LinearLayout
@@ -24,26 +25,51 @@
             android:id="@+id/name_place_txt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/rounded_style_white"
             android:ems="10"
-            android:hint="Nombre"
+            android:hint="Nombre y Sede!"
             android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textAlignment="center" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_weight="1" />
 
         <EditText
             android:id="@+id/description_place_txt"
             android:layout_width="match_parent"
             android:layout_height="91dp"
+            android:background="@drawable/rounded_style_white"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="Descripcion"
+            android:hint="                                                                                                                                      Cuentanos que ofrecen!"
             android:inputType="textMultiLine"
-            android:singleLine="false" />
+            android:singleLine="false"
+            android:textAlignment="center" />
 
-        <RatingBar
-            android:id="@+id/rating_place_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="match_parent" />
+
+            <RatingBar
+                android:id="@+id/rating_place_bar"
+                android:layout_width="222dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:numStars="5" />
+
+            <Space
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,13 +81,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
+                android:background="@drawable/rounded_style"
                 android:text="Agregar" />
+
+            <Space
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20" />
 
             <Button
                 android:id="@+id/back_to_maps"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
+                android:background="@drawable/rounded_style"
                 android:text="Volver" />
         </LinearLayout>
 

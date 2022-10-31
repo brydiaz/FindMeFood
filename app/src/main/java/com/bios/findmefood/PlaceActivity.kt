@@ -13,6 +13,7 @@ class PlaceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place)
         var keyName = intent.getStringExtra("keyName")
+        title = keyName.toString()
         val txtName = findViewById<TextView>(R.id.name_place_txt)
         val ratingBar = findViewById<RatingBar>(R.id.rating_place_bar)
         val descriptionName = findViewById<TextView>(R.id.description_place_txt)

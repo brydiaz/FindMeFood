@@ -5,12 +5,15 @@
       <map>
         <entry key="..\:/Users/valea/AndroidStudioProjects/FindMeFood/app/src/main/res/layout/activity_auth.xml" value="0.17481884057971014" />
         <entry key="..\:/Users/valea/AndroidStudioProjects/FindMeFood/app/src/main/res/layout/activity_ray_test.xml" value="0.22447916666666667" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.21" />
+        <entry key="app/src/main/res/drawable/rounded_style.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/rounded_style_white.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_new_place.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_place.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_place.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_ray_test.xml" value="0.19655797101449277" />
       </map>
     </option>

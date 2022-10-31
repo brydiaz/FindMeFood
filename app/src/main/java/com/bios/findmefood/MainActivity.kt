@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
        Function: Control the flows of the program depending the decision of the user
      */
     private fun setup() {
+        title = "Find Me Food!"
         val addPlaceButton = findViewById<Button>(R.id.add_place_button)
         val seePlacesButton = findViewById<Button>(R.id.see_places_button)
         val backButton = findViewById<Button>(R.id.back_button)
@@ -35,7 +36,8 @@ class MainActivity : AppCompatActivity() {
 
         backButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            onBackPressed()
+            val main = Intent(this, AuthActivity::class.java)
+            startActivity(main)
         }
 
     }

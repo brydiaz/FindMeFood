@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -21,6 +22,7 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         //Setup
         setup()
     }
@@ -31,7 +33,7 @@ class AuthActivity : AppCompatActivity() {
        Function: Make the user validation and call or not the function to show next intent
      */
     private fun setup() {
-        title = "Autentication"
+        title = "Bienvenido!"
         val buttonAcc = findViewById<Button>(R.id.log_in_button)
         val buttonGoogle = findViewById<Button>(R.id.googleLogIn_btt)
 

@@ -1,9 +1,13 @@
 package com.bios.findmefood
 
+import android.content.Context
+import android.widget.ArrayAdapter
 import android.widget.RatingBar
+import android.widget.Spinner
 import android.widget.TextView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +41,7 @@ class DataBaseControl {
                data.add(Place(name,description,calification,latitude,longitude))
                val coor = LatLng(latitude, longitude)
                val marker = MarkerOptions().position(coor).title(name)
+                   .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon__2___1_))
                gmap.addMarker(marker)
 
            }
@@ -71,5 +76,23 @@ class DataBaseControl {
         }
 
 
+    fun loadPlaces(spinner:Spinner, context:Context) {
+        db.collection("places").get().addOnSuccessListener {
+            val names = mutableListOf<String>()
+            names.add("Selecciona lugar a buscar")
+            for (i in it.documents) {
+                val name = i.get("name") as String
+                names.add(name)
+            }
 
+            if (spinner != null) {
+                val adapter = ArrayAdapter(
+                    context,
+                    android.R.layout.simple_spinner_item, names
+                )
+                spinner.adapter = adapter
+            }
+
+        }
+    }
 }

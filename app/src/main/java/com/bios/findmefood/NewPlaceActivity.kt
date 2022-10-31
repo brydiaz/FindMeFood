@@ -36,6 +36,7 @@ class NewPlaceActivity : AppCompatActivity() {
       Function: Setup all the settings
     */
     private fun setup() {
+        title = "Agrega Otro Local!"
         val backButton = findViewById<Button>(R.id.back_to_maps)
         val addButton = findViewById<Button>(R.id.make_calification_btt)
         backButton.setOnClickListener {
@@ -67,13 +68,14 @@ class NewPlaceActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, "Null location",
                             Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(applicationContext, "Locacion obtenida!",
+                        Toast.makeText(applicationContext, "Agregado con exito!",
                             Toast.LENGTH_SHORT).show()
                         val name = findViewById<EditText>(R.id.name_place_txt)
                         val description = findViewById<EditText>(R.id.description_place_txt)
                         val calification = findViewById<RatingBar>(R.id.rating_place_bar)
                         db.addPlace(name.text.toString(), description.text.toString(),
                             calification.rating, location.latitude, location.longitude)
+                        onBackPressed()
                     }
                 }
 
