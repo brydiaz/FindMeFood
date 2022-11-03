@@ -98,7 +98,7 @@ class AuthActivity : AppCompatActivity() {
        Restrictions: -
        Function: Start one dialog alert
      */
-    private fun showAlert() {
+     fun showAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
         builder.setMessage("Se ha producido un error autenticando")
@@ -113,7 +113,7 @@ class AuthActivity : AppCompatActivity() {
        Restrictions: -
        Function: Start the main activity
      */
-    private fun showMain() {
+    fun showMain() {
         val mainIntent = Intent(this, MainActivity::class.java).apply {}
         startActivity(mainIntent)
     }
